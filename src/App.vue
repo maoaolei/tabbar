@@ -1,28 +1,54 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+<div id="app">
+  <my-header color="white" title="Tabbar" background="pink"></my-header>
+  <component :is="componentName"></component>
+  <my-footer :list="tabList" @changeFn="componentName=$event"></my-footer>
+
+</div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import MyHeader from 'cpns/MyHeader.vue'
+import MyFooter from 'cpns/MyFooter.vue'
+import MyGoodsList from '@/views/MyGoodsList'
+import MyGoodsSearch from '@/views/MyGoodsSearch'
+import MyUserInfo from '@/views/MyUserInfo'
 export default {
-  name: 'App',
+  data() {
+    return {
+      componentName: 'MyGoodsList',
+      tabList: [
+    {
+        iconText: "icon-shangpinliebiao",
+        text: "商品列表",
+        componentName: "MyGoodsList"
+    },
+    {
+        iconText: "icon-sousuo",
+        text: "商品搜索",
+        componentName: "MyGoodsSearch"
+    },
+    {
+        iconText: "icon-user",
+        text: "我的信息",
+        componentName: "MyUserInfo"
+    }
+]
+    }
+  },
   components: {
-    HelloWorld
-  }
+    MyHeader,
+    MyFooter,
+    MyGoodsList,
+    MyGoodsSearch,
+    MyUserInfo
+  },
+
 }
 </script>
 
-<style lang="less">
+<style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  padding: 45px 0 50px;
 }
 </style>
